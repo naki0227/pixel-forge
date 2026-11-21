@@ -38,7 +38,7 @@
     <h1 id="hero-title">ドット絵と2Dアクションのインディーゲームスタジオ</h1>
     <p lang="en">PIXEL FORGE Inc. / Akihabara, Tokyo</p>
   </div></div>
-  <section class="hero-mosaic" aria-labelledby="hero-title">
+  <section class="hero-mosaic" id="hero" aria-labelledby="hero-title" aria-roledescription="タイトルの切り替え">
     <a class="tile tile-main" href="./games.html#neon-blade">
       <img src="./images/neon-blade-title.webp" width="1200" height="655" alt="『CODE: NEON BLADE』のタイトル画面。ネオンの看板が並ぶ電脳都市">
       <span class="tile-text">
@@ -61,6 +61,10 @@
         <span class="tile-name">クロノ・ブレイカー</span>
       </span>
     </a>
+    <div class="hero-ctrl" hidden>
+      <span class="hero-count" aria-hidden="true"><span id="hero-now">1</span> / 5</span>
+      <button type="button" class="hero-pause" aria-pressed="false">停止</button>
+    </div>
   </section>
 
   <section class="section" id="news" aria-labelledby="news-title">

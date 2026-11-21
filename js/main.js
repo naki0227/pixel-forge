@@ -181,4 +181,89 @@
       showStep(2);
     });
   }
+
+  // ---- 4. トップ：大きい枠のタイトルを順に切り替える ----
+  // 右の2枚は「次に出る2タイトル」。押すとそのタイトルを大きい枠へ。
+  // マウスを乗せている間・中にフォーカスがある間・停止中・動きを減らす設定・タブが裏のときは進めない。
+  var hero = document.getElementById("hero");
+  if (hero) {
+    var titles = [
+      { slug: "neon-blade", name: "CODE: NEON BLADE", tag: "開発中・体験版をSteamで配信中",
+        meta: "2027年春 発売予定　Steam / PS5 / Xbox Series X|S", alt: "『CODE: NEON BLADE』のタイトル画面。ネオンの看板が並ぶ電脳都市" },
+      { slug: "alchemist", name: "星屑のアルケミスト", tag: "ベストアート賞受賞",
+        meta: "2025年9月25日発売　Steam / Nintendo Switch", alt: "『星屑のアルケミスト 〜忘れられた工房〜』のタイトル画面。円窓のある錬金術工房" },
+      { slug: "chrono-breaker", name: "クロノ・ブレイカー", tag: "全世界累計15万本",
+        meta: "2021年11月18日発売　Steam / Nintendo Switch / PS5", alt: "『クロノ・ブレイカー』のタイトル画面。時計塔の廃墟で少女が大剣を構える" },
+      { slug: "brave-frontier", name: "ブレイブ・フロンティア・クロニクル", tag: "受託開発（バトル設計・ドット絵）",
+        meta: "2024年6月12日発売　Switch / PS5 / PS4 / Steam", alt: "『ブレイブ・フロンティア・クロニクル』のタイトル画面。城と丘を背に部隊が並ぶ" },
+      { slug: "grimoire-library", name: "魔導書と秘密の図書館", tag: "受託開発（移植・UI／背景）",
+        meta: "2023年3月10日発売　Steam / iOS / Android", alt: "『魔導書と秘密の図書館』のタイトル画面。円窓のある巨大な図書館" }
+    ];
+    var tiles = Array.prototype.slice.call(hero.querySelectorAll(".tile"));
+    var nowEl = document.getElementById("hero-now");
+    var pauseBtn = hero.querySelector(".hero-pause");
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var INTERVAL = 6000;
+    var current = 0, paused = reduce.matches, hovering = false, focused = false, timer = null;
+
+    var fill = function (tile, t, animate) {
+      var img = tile.querySelector("img");
+      var set = function () {
+        img.src = "./images/" + t.slug + "-title.webp";
+        img.alt = tile.classList.contains("tile-main") ? t.alt : "";
+        tile.href = "./games.html#" + t.slug;
+        tile.dataset.index = titles.indexOf(t);
+        tile.querySelector(".tile-tag").textContent = t.tag;
+        tile.querySelector(".tile-name").textContent = t.name;
+        var meta = tile.querySelector(".tile-meta");
+        if (meta) meta.textContent = t.meta;
+        img.classList.remove("is-fading");
+      };
+      if (!animate || reduce.matches) { set(); return; }
+      img.classList.add("is-fading");
+      setTimeout(set, 350);
+    };
+
+    var show = function (i, animate) {
+      current = (i + titles.length) % titles.length;
+      tiles.forEach(function (tile, k) { fill(tile, titles[(current + k) % titles.length], animate); });
+      nowEl.textContent = current + 1;
+    };
+
+    var schedule = function () {
+      clearTimeout(timer);
+      if (paused || hovering || focused || document.hidden) return;
+      timer = setTimeout(function () { show(current + 1, true); schedule(); }, INTERVAL);
+    };
+
+    // 右の2枚：押すと大きい枠へ（大きい枠を押したときは、そのままタイトルの詳細へ）
+    tiles.slice(1).forEach(function (tile) {
+      tile.addEventListener("click", function (e) {
+        e.preventDefault();
+        show(+tile.dataset.index, true);
+        schedule();
+      });
+    });
+    hero.addEventListener("mouseenter", function () { hovering = true; schedule(); });
+    hero.addEventListener("mouseleave", function () { hovering = false; schedule(); });
+    hero.addEventListener("focusin", function () { focused = true; schedule(); });
+    hero.addEventListener("focusout", function (e) { if (!hero.contains(e.relatedTarget)) { focused = false; schedule(); } });
+    document.addEventListener("visibilitychange", schedule);
+
+    var setPaused = function (p) {
+      paused = p;
+      pauseBtn.textContent = p ? "再生" : "停止";
+      pauseBtn.setAttribute("aria-pressed", String(p));
+      schedule();
+    };
+    pauseBtn.addEventListener("click", function () { setPaused(!paused); });
+
+    // 先に5枚を読んでおく（通信を節約する設定のときは読まない）
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if (!saveData) titles.forEach(function (t) { new Image().src = "./images/" + t.slug + "-title.webp"; });
+
+    show(0, false);
+    hero.querySelector(".hero-ctrl").hidden = false;
+    setPaused(paused);
+  }
 })();

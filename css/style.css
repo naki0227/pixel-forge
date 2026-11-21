@@ -387,3 +387,23 @@ p { margin: 0; }
 .page-head .catch-sub { display: block; margin-top: 8px; font-size: 16px; font-weight: 500; color: var(--on-iron-sub); }
 
 .nw { white-space: nowrap; }
+
+/* 最初の画面：大きい枠の切り替え（js/main.js） */
+.tile img { transition: opacity .35s ease, transform .6s cubic-bezier(.2, .7, .2, 1); }
+.tile img.is-fading { opacity: 0; }
+.tile:not(.tile-main) .tile-meta { display: none; }
+.hero-ctrl {
+  position: absolute; z-index: 3; left: calc(66.66% - 16px); bottom: 16px; transform: translateX(-100%);
+  display: flex; align-items: center; gap: 12px; color: #fff;
+}
+.hero-ctrl[hidden] { display: none; }
+.hero-count { font-family: var(--font-dot); font-weight: 600; font-size: 15px; text-shadow: 0 1px 6px rgba(0, 0, 0, .8); }
+.hero-pause {
+  font: inherit; font-size: 13px; font-weight: 700; color: #fff; cursor: pointer;
+  background: rgba(10, 9, 8, .6); border: 1px solid #fff; border-radius: 2px; padding: 4px 12px;
+}
+.tile:not(.tile-main) { cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .tile img { transition: none; } }
+@media (max-width: 900px) {
+  .hero-ctrl { left: auto; right: 12px; top: 12px; bottom: auto; transform: none; }
+}
