@@ -94,7 +94,7 @@ p { margin: 0; }
   .menu-btn { display: block; }
   .gnav {
     position: fixed; inset: 64px 0 auto 0; background: var(--iron);
-    max-height: calc(100vh - 64px); overflow-y: auto;
+    height: calc(100vh - 64px); height: calc(100dvh - 64px); overflow-y: auto;
     display: none; padding: 8px var(--gutter) 24px;
   }
   .gnav.is-open { display: block; }
@@ -384,3 +384,5 @@ p { margin: 0; }
 .logo-band { margin: 0; background: #0d1530; }
 .logo-band img { width: 100%; max-height: 520px; object-fit: cover; }
 .page-head .catch-sub { display: block; margin-top: 8px; font-size: 16px; font-weight: 500; color: var(--on-iron-sub); }
+
+.nw { white-space: nowrap; }
