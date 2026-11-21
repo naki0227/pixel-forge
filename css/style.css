@@ -86,8 +86,9 @@ p { margin: 0; }
 .gnav .nav-entry a { background: var(--ember); color: #fff; }
 .gnav .nav-entry a span { color: #fff; }
 .menu-btn {
-  display: none; background: none; border: 0; color: var(--on-iron);
-  font-family: var(--font-dot); font-size: 15px; padding: 10px 4px; cursor: pointer;
+  display: none; background: none; border: 1px solid var(--on-iron); border-radius: 2px; color: var(--on-iron);
+  font-family: var(--font-dot); font-weight: 600; font-size: 14px; letter-spacing: .06em;
+  min-width: 84px; padding: 8px 12px; text-align: center; cursor: pointer; /* MENU と CLOSE で幅を変えない */
 }
 
 @media (max-width: 900px) {
