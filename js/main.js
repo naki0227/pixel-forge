@@ -36,16 +36,36 @@
     var emptyEl = document.getElementById("game-empty");
     var state = { kind: "all", pf: "all" };
 
+    var match = function (g, kind, pf) {
+      return (kind === "all" || g.dataset.kind === kind) &&
+        (pf === "all" || g.dataset.pf.split(" ").indexOf(pf) !== -1);
+    };
+    var chips = Array.prototype.slice.call(filter.querySelectorAll(".chip"));
+
     var apply = function () {
       var shown = 0;
       games.forEach(function (g) {
-        var okKind = state.kind === "all" || g.dataset.kind === state.kind;
-        var okPf = state.pf === "all" || g.dataset.pf.split(" ").indexOf(state.pf) !== -1;
-        g.hidden = !(okKind && okPf);
+        g.hidden = !match(g, state.kind, state.pf);
         if (!g.hidden) shown++;
       });
       countEl.textContent = shown;
       emptyEl.hidden = shown !== 0;
+      // 各ボタンに「押したら何件になるか」を出す
+      chips.forEach(function (c) {
+        var kind = c.dataset.kind || state.kind;
+        var pf = c.dataset.pf || state.pf;
+        var n = games.filter(function (g) { return match(g, kind, pf); }).length;
+        var span = c.querySelector(".n") || c.appendChild(document.createElement("span"));
+        span.className = "n";
+        span.textContent = n;
+        c.setAttribute("aria-pressed", String(c.dataset.kind ? c.dataset.kind === state.kind : c.dataset.pf === state.pf));
+      });
+      // 条件を URL に残す（共有・戻るで同じ一覧に戻れる）
+      var q = new URLSearchParams();
+      if (state.kind !== "all") q.set("kind", state.kind);
+      if (state.pf !== "all") q.set("pf", state.pf);
+      var qs = q.toString();
+      history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
     };
 
     filter.addEventListener("click", function (e) {
@@ -53,11 +73,15 @@
       if (!btn) return;
       var key = btn.dataset.kind ? "kind" : "pf";
       state[key] = btn.dataset[key];
-      btn.parentElement.querySelectorAll(".chip").forEach(function (c) {
-        c.setAttribute("aria-pressed", String(c === btn));
-      });
       apply();
     });
+
+    var initial = new URLSearchParams(location.search);
+    chips.forEach(function (c) {
+      if (c.dataset.kind && c.dataset.kind === initial.get("kind")) state.kind = c.dataset.kind;
+      if (c.dataset.pf && c.dataset.pf === initial.get("pf")) state.pf = c.dataset.pf;
+    });
+    apply();
     // スクリプトが無いときは全件をそのまま読めるように、絞り込みの欄はスクリプトで出す
     filter.hidden = false;
   }
