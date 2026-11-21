@@ -104,21 +104,6 @@ p { margin: 0; }
   .gnav .nav-entry a { margin-top: 16px; text-align: center; border: 0; }
 }
 
-/* ===== 最初の画面 ===== */
-.hero { background: var(--iron); color: var(--on-iron); overflow: hidden; }
-.hero .wrap {
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(24px, 4vw, 56px);
-  align-items: center; padding-top: clamp(48px, 8vw, 96px); padding-bottom: clamp(48px, 8vw, 96px);
-}
-.hero h1 { font-size: clamp(30px, 3.4vw, 44px); letter-spacing: .02em; }
-.hero h1 .en {
-  display: block; margin-top: 12px; font-family: var(--font-dot); font-weight: 500;
-  font-size: clamp(16px, 1.8vw, 22px); color: var(--ember-lit); letter-spacing: .03em; line-height: 1.5;
-}
-.hero .lead { margin-top: 28px; max-width: 36em; color: var(--on-iron-sub); }
-.hero .lead strong { color: var(--on-iron); font-weight: 500; }
-.hero-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
-
 .btn {
   border-radius: 2px;
   display: inline-flex; align-items: center; gap: 8px;
@@ -128,20 +113,6 @@ p { margin: 0; }
 .btn:hover { background: #a93a14; }
 .btn.ghost { background: transparent; color: inherit; box-shadow: inset 0 0 0 2px currentColor; }
 .btn.ghost:hover { background: rgba(255,255,255,.08); }
-
-/* 開発中タイトルの札（最初の画面の右） */
-.wip-card { background: transparent; }
-.wip-card .shot { aspect-ratio: 16 / 9; background: #2f2b26; }
-.wip-card .shot img { width: 100%; height: 100%; object-fit: cover; }
-.wip-card .body { padding: 16px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 24px; }
-.wip-card .body h2 { flex: 1 0 100%; }
-.wip-card h2 { font-size: 20px; margin-top: 6px; }
-.wip-card dl { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 8px 0 0; font-size: 15px; }
-.wip-card dl div { display: flex; gap: 8px; }
-.wip-card dt { color: var(--on-iron-sub); }
-.wip-card dd { margin: 0; }
-.wip-card a { display: inline-block; margin-top: 10px; font-size: 15px; }
-
 
 /* ===== 章 ===== */
 .section { padding: clamp(64px, 9vw, 112px) 0; }
@@ -174,19 +145,6 @@ p { margin: 0; }
 .message .sign { margin-top: 24px; font-size: 15px; color: var(--ink-sub); }
 .message .sign strong { display: block; font-size: 20px; color: var(--ink); }
 
-/* トップの入口（タイトル・採用） */
-.doorway { display: grid; grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr); gap: 0; }
-.doorway a { display: block; text-decoration: none; padding: clamp(28px, 4vw, 48px); }
-.doorway .to-games { background: #ebe9e4; }
-.doorway .to-recruit { background: var(--iron); color: var(--on-iron); }
-.doorway .to-recruit .more { color: var(--ember-lit); }
-.doorway .en { font-family: var(--font-dot); font-weight: 600; font-size: clamp(26px, 3vw, 36px); line-height: 1.2; display: block; }
-.doorway .ja { display: block; margin-top: 10px; }
-.doorway .more { display: inline-block; margin-top: 18px; font-weight: 700; color: var(--ember); }
-.doorway ul { list-style: none; margin: 18px 0 0; padding: 0; font-size: 15px; }
-.doorway ul li { padding: 6px 0; border-bottom: 1px solid #cfc7b9; }
-.doorway a:hover .more { text-decoration: underline; }
-
 /* ===== 開発タイトル ===== */
 .filter { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-bottom: 32px; }
 .filter fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -200,20 +158,27 @@ p { margin: 0; }
 .filter .count strong { font-family: var(--font-dot); font-size: 20px; color: var(--ember); font-weight: 600; }
 .chip .n { margin-left: 6px; font-size: 13px; opacity: .75; }
 
-.game { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr); gap: clamp(24px, 4vw, 56px); padding: 48px 0; border-top: 2px solid var(--ink); }
+/* 1タイトル＝1本の帯。ゲーム画面を暗くして背景に敷き、タイトル画面を左に（Supergiant の型） */
+.game-list { display: grid; gap: 4px; }
+.game { position: relative; overflow: hidden; background: var(--iron); color: var(--on-iron); }
 .game[hidden] { display: none; }
-.game .shot { aspect-ratio: 16 / 9; background: #312d28; }
-.game .shot img { width: 100%; height: 100%; object-fit: cover; }
-.game .kind { font-size: 13px; font-weight: 700; color: var(--ember); }
-.game h2 { font-size: clamp(20px, 2.2vw, 26px); margin-top: 4px; }
-.game h2 .en { display: block; font-family: var(--font-dot); font-weight: 400; font-size: 15px; color: var(--ink-sub); }
-.game .catch { margin-top: 12px; font-weight: 700; font-size: 16px; }
+.game-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(2px); transform: scale(1.04); opacity: .35; }
+.game-inner {
+  position: relative; max-width: var(--max); margin: 0 auto; padding: clamp(40px, 6vw, 72px) var(--gutter);
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start;
+}
+.shots { margin: 0; display: grid; gap: 4px; }
+.shots img { width: 100%; aspect-ratio: 1200 / 655; object-fit: cover; }
+.game .kind { display: inline-block; padding: 2px 8px; background: var(--ember); color: #fff; font-size: 13px; font-weight: 700; }
+.game h2 { font-size: clamp(24px, 2.6vw, 34px); margin-top: 12px; }
+.game h2 .en { display: block; font-family: var(--font-dot); font-weight: 600; font-size: 15px; color: var(--on-iron-sub); letter-spacing: .06em; }
+.game .catch { margin-top: 12px; font-weight: 700; font-size: 17px; color: var(--ember-lit); }
 .game .spec { display: grid; grid-template-columns: 7em minmax(0, 1fr); gap: 4px 12px; margin: 20px 0 0; font-size: 15px; }
-.game .spec dt, .game .spec dd { margin: 0; }
-.game .spec dt { color: var(--ink-sub); }
-.game .summary { margin-top: 20px; }
-.game .role { margin-top: 16px; font-size: 15px; padding-left: 12px; box-shadow: inset 3px 0 0 var(--ember); }
-.empty { padding: 48px 0; border-top: 2px solid var(--ink); }
+.game .spec dt { color: var(--on-iron-sub); }
+.game .spec dd { margin: 0; }
+.game .summary { margin-top: 20px; color: #e6e1d8; }
+.game .role { margin-top: 16px; font-size: 15px; padding-left: 12px; box-shadow: inset 3px 0 0 var(--ember-lit); }
+.empty { padding: 48px 0; }
 
 /* ===== 会社概要 ===== */
 .outline { display: grid; grid-template-columns: 10em 1fr; margin: 0; border-top: 2px solid var(--ink); }
@@ -318,7 +283,7 @@ p { margin: 0; }
 
 /* ===== 幅が狭いとき ===== */
 @media (max-width: 900px) {
-  .hero .wrap, .message, .doorway, .game, .entry-band .wrap, .site-footer .wrap { grid-template-columns: 1fr; }
+  .message, .game-inner, .entry-band .wrap, .site-footer .wrap { grid-template-columns: 1fr; }
   .message .portrait { max-width: 360px; }
 }
 .done-title { font-size: 24px; }
@@ -326,9 +291,6 @@ p { margin: 0; }
 
 /* ===== 画像（課題素材） ===== */
 .logo img { width: 32px; height: 36px; object-fit: contain; }
-.shots { display: grid; gap: 8px; align-content: start; }
-.shots img { width: 100%; aspect-ratio: 1200 / 655; object-fit: cover; background: #2a2723; }
-.shots img:not(.main) { width: 50%; }
 .door-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin-bottom: 20px; }
 .recruit-photo { margin: 0; }
 .recruit-photo img { width: 100%; max-height: 420px; object-fit: cover; }
@@ -348,4 +310,77 @@ p { margin: 0; }
 .history li { display: grid; grid-template-columns: 9em minmax(0, 1fr); gap: 4px 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
 .history time { font-family: var(--font-dot); font-weight: 600; color: var(--ember); }
 @media (max-width: 900px) { .values { grid-template-columns: 1fr; gap: 28px; } }
-@media (max-width: 600px) { .history li { grid-template-columns: 1fr; } .shots img:not(.main) { width: 100%; } }
+@media (max-width: 600px) { .history li { grid-template-columns: 1fr; } }
+
+/* ===== トップ：ゲームの絵を敷き詰める ===== */
+.hero-actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-mosaic {
+  position: relative; background: var(--iron);
+  display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); grid-template-rows: 1fr 1fr;
+  gap: 4px; height: min(calc(100vh - 120px), 780px); min-height: 480px;
+}
+.hero-strip { background: var(--iron); color: var(--on-iron); border-top: 1px solid #3a3631; }
+.hero-strip .wrap { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 24px; padding-top: 14px; padding-bottom: 14px; }
+.hero-strip h1 { font-size: clamp(16px, 1.6vw, 20px); }
+.hero-strip p { font-family: var(--font-dot); font-weight: 600; font-size: 14px; letter-spacing: .08em; color: var(--ember-lit); }
+.tile { position: relative; display: block; overflow: hidden; color: #fff; text-decoration: none; }
+.tile-main { grid-row: 1 / 3; }
+.tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 9, 8, .85), rgba(10, 9, 8, 0) 55%); }
+.tile-text { position: absolute; z-index: 1; left: clamp(16px, 2.4vw, 32px); right: 16px; bottom: clamp(16px, 2.4vw, 32px); }
+.tile-tag { display: inline-block; padding: 2px 8px; background: var(--ember); font-size: 13px; font-weight: 700; }
+.tile-name { display: block; margin-top: 6px; font-weight: 700; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.3; }
+.tile-main .tile-name { font-size: clamp(24px, 2.4vw, 34px); }
+.tile-meta { display: block; margin-top: 8px; font-size: 15px; color: #e6e1d8; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .tile:hover img, .game-grid a:hover img, .door:hover img { transform: scale(1.04); }
+}
+@media (max-width: 900px) {
+  .hero-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; height: auto; min-height: 0; }
+  .tile-main { grid-column: 1 / 3; grid-row: auto; aspect-ratio: 4 / 5; }
+  .tile { aspect-ratio: 1 / 1; }
+  .tile-main .tile-name { font-size: 22px; }
+  .tile-name { font-size: 17px; }
+  .tile-tag { font-size: 12px; }
+}
+
+/* NEWS：写真つきの札 */
+.news-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.news-cards li { position: relative; }
+.news-cards img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin-bottom: 14px; }
+.news-cards time { font-family: var(--font-dot); font-weight: 600; color: var(--ember); }
+.news-cards p { margin-top: 4px; }
+.stretch { position: absolute; inset: 0; }
+.news-cards li:hover p { text-decoration: underline; }
+@media (max-width: 900px) { .news-cards { grid-template-columns: 1fr; gap: 28px; } }
+
+/* GAMES：絵の格子（端まで） */
+.games-band { background: var(--iron); color: var(--on-iron); padding-top: clamp(64px, 9vw, 112px) !important; }
+.games-band .sec-head p { color: var(--on-iron-sub); }
+.game-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+.game-grid a { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; color: #fff; text-decoration: none; background: #26231f; }
+.game-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.game-grid a::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 9, 8, .85), rgba(10, 9, 8, 0) 50%); }
+.game-grid span { position: absolute; z-index: 1; left: 20px; right: 20px; bottom: 18px; font-weight: 700; font-size: 20px; line-height: 1.35; }
+.game-grid small { display: block; font-family: var(--font-dot); font-weight: 500; font-size: 14px; color: #e6e1d8; }
+.grid-more a { background: var(--ember); display: flex; align-items: flex-end; }
+.grid-more a::after { display: none; }
+.grid-more small { color: #fff; }
+@media (max-width: 900px) { .game-grid { grid-template-columns: 1fr 1fr; } .game-grid span { font-size: 16px; left: 12px; bottom: 12px; } }
+
+/* 代表メッセージ */
+.message-lead { font-size: clamp(20px, 2.2vw, 26px); font-weight: 700; line-height: 1.6; }
+.more-link { margin-top: 16px; font-weight: 700; }
+
+/* 会社概要・採用への入口：写真の札 */
+.doors { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4px; }
+.door { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; color: #fff; text-decoration: none; }
+.door img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.door::after { content: ""; position: absolute; inset: 0; background: rgba(10, 9, 8, .45); }
+.door-text { position: absolute; z-index: 1; left: clamp(20px, 3vw, 40px); bottom: clamp(20px, 3vw, 40px); font-weight: 700; font-size: 17px; }
+.door-text .en { display: block; font-family: var(--font-dot); font-weight: 700; font-size: clamp(32px, 4vw, 56px); line-height: 1.1; }
+@media (max-width: 600px) { .doors { grid-template-columns: 1fr; } }
+
+.logo-band { margin: 0; background: #0d1530; }
+.logo-band img { width: 100%; max-height: 520px; object-fit: cover; }
+.page-head .catch-sub { display: block; margin-top: 8px; font-size: 16px; font-weight: 500; color: var(--on-iron-sub); }
