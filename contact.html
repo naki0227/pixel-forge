@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>お問い合わせ｜株式会社ピクセル・フォージ</title>
+<meta name="description" content="株式会社ピクセル・フォージへのお問い合わせフォームです（授業課題用の架空の企業）。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Silkscreen&display=swap">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="./index.html" aria-label="株式会社ピクセル・フォージ トップへ">PIXEL FORGE <small>Inc.</small></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="gnav">MENU</button>
+    <nav class="gnav" id="gnav" aria-label="グローバルメニュー">
+      <ul>
+        <li><a href="./company.html">COMPANY<span>会社概要</span></a></li>
+        <li><a href="./games.html">GAMES<span>開発タイトル</span></a></li>
+        <li><a href="./index.html#news">NEWS<span>お知らせ</span></a></li>
+        <li><a href="./recruit.html">RECRUIT<span>採用情報</span></a></li>
+        <li class="nav-entry"><a href="./contact.html" aria-current="page">CONTACT<span>お問い合わせ</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <nav class="crumb" aria-label="パンくずリスト"><ol><li><a href="./index.html">TOP</a></li><li aria-current="page">お問い合わせ</li></ol></nav>
+      <h1 lang="en">CONTACT<span lang="ja">お問い合わせ</span></h1>
+      <p class="lead">株式会社ピクセル・フォージへのお問い合わせは、下記フォームより受け付けております。ゲームに関するご感想、ビジネス・協業のご相談、取材のご依頼など、お気軽にお問い合わせください。内容を確認のうえ、担当者より通常3営業日以内にご返信いたします。</p>
+    </div>
+  </div>
+
+  <section class="section" aria-labelledby="notes-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 lang="en">BEFORE YOU ASK</h2>
+        <p id="notes-title">お問い合わせ前のご確認事項</p>
+      </div>
+      <ul class="notes">
+        <li><strong>ゲームの攻略・仕様に関する個別のご質問</strong>大変恐れ入りますが、ゲームの攻略方法や未公開情報に関する個別のお問い合わせにはお答えいたしかねます。</li>
+        <li><strong>ゲーム企画・アイデアの持ち込み</strong>トラブル防止のため、一般の方からのゲーム企画・シナリオ・イラスト等のアイデアのご提案はお受けしておりません。</li>
+        <li><strong>採用へのご応募</strong>正式なエントリーをご希望の方は、<a href="./recruit.html">採用情報（RECRUIT）ページ</a>よりご応募ください。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="form-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 lang="en">FORM</h2>
+        <p id="form-title">お問い合わせフォーム</p>
+      </div>
+      <ol class="step-bar" id="step-bar">
+        <li aria-current="step">1. 入力</li>
+        <li>2. 確認</li>
+        <li>3. 完了</li>
+      </ol>
+
+      <noscript><p>このフォームは JavaScript を使っています。ブラウザの JavaScript を有効にしてください。</p></noscript>
+
+      <form class="form" id="contact-form" novalidate>
+        <div class="field">
+          <label for="f-type">お問い合わせ種別 <span class="req">必須</span></label>
+          <select id="f-type" name="type" required>
+            <option value="">選択してください</option>
+            <option value="game">ゲームタイトルに関するご意見・ご感想・不具合報告</option>
+            <option value="business">法人のお客様（開発協業・パブリッシング・ライセンス等のご相談）</option>
+            <option value="press">メディア・プレス関係者様（取材・素材提供のご依頼）</option>
+            <option value="recruit">採用・カジュアル面談に関するご質問</option>
+            <option value="other">その他のお問い合わせ</option>
+          </select>
+          <p class="err" hidden>お問い合わせ種別を選択してください。</p>
+        </div>
+        <div class="field" id="title-field">
+          <label for="f-title">対象タイトル <span class="opt">任意</span></label>
+          <select id="f-title" name="title">
+            <option value="">選択なし／全体に関するお問い合わせ</option>
+            <option>クロノ・ブレイカー</option>
+            <option>星屑のアルケミスト 〜忘れられた工房〜</option>
+            <option>CODE: NEON BLADE（コード：ネオンブレード）</option>
+            <option>ブレイブ・フロンティア・クロニクル</option>
+            <option>魔導書と秘密の図書館</option>
+            <option>その他・未発表タイトル</option>
+          </select>
+          <p class="hint">※ゲームに関するお問い合わせの場合にご選択ください</p>
+        </div>
+        <div class="field">
+          <label for="f-name">お名前 <span class="req">必須</span></label>
+          <input type="text" id="f-name" name="name" placeholder="例）鍛冶屋 創" autocomplete="name" required>
+          <p class="hint">※ニックネームやハンドルネームでも構いません（法人の場合はご担当者様名をご入力ください）。</p>
+          <p class="err" hidden>お名前を入力してください。</p>
+        </div>
+        <div class="field">
+          <label for="f-kana">フリガナ <span class="opt">任意</span></label>
+          <input type="text" id="f-kana" name="kana" placeholder="例）カジヤ ハジメ">
+        </div>
+        <div class="field">
+          <label for="f-org">貴社名・媒体名 <span class="opt">任意</span></label>
+          <input type="text" id="f-org" name="org" placeholder="例）株式会社〇〇／〇〇編集部" autocomplete="organization">
+          <p class="hint">※法人・メディア関係者様はご入力ください。</p>
+        </div>
+        <div class="field">
+          <label for="f-email">メールアドレス <span class="req">必須</span></label>
+          <input type="email" id="f-email" name="email" placeholder="例）info@example.com" autocomplete="email" required>
+          <p class="hint">※ドメイン指定受信を設定されている場合は「@pixelforge.example.jp」からのメールを受信できるよう設定をお願いいたします。</p>
+          <p class="err" hidden>メールアドレスを正しい形式で入力してください。</p>
+        </div>
+        <div class="field">
+          <label for="f-body">お問い合わせ内容 <span class="req">必須</span></label>
+          <textarea id="f-body" name="body" required placeholder="お問い合わせ内容をご記入ください。&#10;※不具合のご報告の際は、ご利用のプラットフォーム（PC / Switch / PS5 / iOS / Android等）や発生状況をあわせてご記載いただけますと幸いです。"></textarea>
+          <p class="err" hidden>お問い合わせ内容を入力してください。</p>
+        </div>
+        <div class="field agree">
+          <label><input type="checkbox" id="f-agree" name="agree" required> プライバシーポリシーに同意する <span class="req">必須</span></label>
+          <p class="hint">ご入力いただいた個人情報は、お問い合わせへの回答および対応上必要な手続きにのみ利用し、法令に基づく場合を除き第三者へ提供いたしません。</p>
+          <p class="err" hidden>プライバシーポリシーへの同意が必要です。</p>
+        </div>
+        <div class="form-actions">
+          <button class="btn" type="submit">入力内容を確認する →</button>
+        </div>
+        <p class="demo-note">※授業課題用の架空の企業のため、入力した内容はどこにも送信・保存されません。</p>
+      </form>
+
+      <div class="form" id="contact-confirm" hidden tabindex="-1">
+        <h3 class="sr-only">入力内容の確認</h3>
+        <dl class="confirm-table" id="confirm-list"></dl>
+        <div class="form-actions">
+          <button class="btn" type="button" id="btn-send">この内容で送信する</button>
+          <button class="btn ghost" type="button" id="btn-back">修正する</button>
+        </div>
+      </div>
+
+      <div class="form" id="contact-done" hidden tabindex="-1">
+        <h3 class="done-title">お問い合わせを受け付けました</h3>
+        <p class="done-text">株式会社ピクセル・フォージへお問い合わせいただき、誠にありがとうございます。ご入力いただいたメールアドレス宛に、自動返信の確認メールをお送りいたしました。内容を確認のうえ、担当者より順次ご連絡いたしますので、今しばらくお待ちください。</p>
+        <p class="done-text">なお、数日経過しても返信がない場合は、メールアドレスの誤入力や迷惑メールフォルダへの振り分けの可能性がございます。お手数ですが再度お問い合わせください。</p>
+        <p class="demo-note">※授業課題用のデモのため、実際にはメールは送られません。</p>
+        <div class="form-actions"><a class="btn" href="./index.html">トップページへ戻る</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <p class="name">株式会社ピクセル・フォージ（Pixel Forge Inc.）</p>
+      <address>〒101-0021 東京都千代田区外神田 X-X-X ピクセルビル 4F</address>
+      <p class="contact-cta"><a class="btn" href="./contact.html">お問い合わせフォーム</a></p>
+    </div>
+    <nav aria-label="フッターメニュー">
+      <ul>
+        <li><a href="./index.html">TOP</a></li>
+        <li><a href="./company.html">会社概要</a></li>
+        <li><a href="./games.html">開発タイトル</a></li>
+        <li><a href="./index.html#news">お知らせ</a></li>
+        <li><a href="./recruit.html">採用情報</a></li>
+        <li><a href="./contact.html">お問い合わせ</a></li>
+      </ul>
+    </nav>
+    <div class="bottom">
+      <p>このサイトは授業課題のために作った架空の企業のサイトです。実在の企業・団体とは関係ありません。</p>
+      <p><small>© 2026 Pixel Forge Inc. All Rights Reserved.</small></p>
+    </div>
+  </div>
+</footer>
+<script src="./js/main.js"></script>
+</body>
+</html>
