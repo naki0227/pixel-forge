@@ -204,7 +204,7 @@
     var pauseBtn = hero.querySelector(".hero-pause");
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     var INTERVAL = 6000;
-    var current = 0, paused = reduce.matches, hovering = false, focused = false, timer = null;
+    var current = 0, paused = reduce.matches, hovering = false, focused = false, offscreen = false, timer = null;
 
     var fill = function (tile, t, animate) {
       var img = tile.querySelector("img");
@@ -232,7 +232,7 @@
 
     var schedule = function () {
       clearTimeout(timer);
-      if (paused || hovering || focused || document.hidden) return;
+      if (paused || hovering || focused || offscreen || document.hidden) return;
       timer = setTimeout(function () { show(current + 1, true); schedule(); }, INTERVAL);
     };
 
@@ -249,6 +249,10 @@
     hero.addEventListener("focusin", function () { focused = true; schedule(); });
     hero.addEventListener("focusout", function (e) { if (!hero.contains(e.relatedTarget)) { focused = false; schedule(); } });
     document.addEventListener("visibilitychange", schedule);
+    // 画面の外へスクロールしたら送りを止め、戻ってきたら続きから（見ていない間に絵を入れ替えない）
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) { offscreen = !entries[0].isIntersecting; schedule(); }).observe(hero);
+    }
 
     var setPaused = function (p) {
       paused = p;
